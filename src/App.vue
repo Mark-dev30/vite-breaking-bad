@@ -12,7 +12,7 @@ export default {
   },
   data() {
     return {
-      store
+      store,
     }
   },
   beforeMount() {
@@ -22,6 +22,10 @@ export default {
     getUrlCards() {
       axios.get(store.url).then((response) => {
         store.arraycards = response.data.data
+        setTimeout(() => {
+          store.loading_page = false
+        }, 5000)
+
       })
     }
   }
