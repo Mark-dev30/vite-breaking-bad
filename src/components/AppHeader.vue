@@ -20,6 +20,7 @@ export default {
 <style lang="scss" scoped>
 .container-fluid {
   height: 100px;
+  background-color: white;
 }
 
 .title-logo {

@@ -1,15 +1,26 @@
 <script>
 import { store } from '../store'
+import axios from 'axios'
 import AppContainCard from '../components/AppContainCard.vue';
+import AppSearch from './AppSearch.vue';
 export default {
   components: {
-    AppContainCard
+    AppContainCard,
+    AppSearch
   },
   data() {
     return {
       store
     }
-  }
+  },
+  methods: {
+    searchType(word) {
+      axios.get(`${store.url}&race=${word}`).then((response) => {
+        store.arraycards = response.data.data
+        store.arraylenght = store.arraycards.length
+      })
+    }
+  },
 }
 </script>
 <template lang="">
@@ -36,13 +47,7 @@ export default {
       </div>
     </div>
     <div class="container-fluid" v-else>
-      <div class="row margin-auto">
-        <div class="col-8">
-            <select name="archetype" id="archetype">
-              <option value="alien">Alien</option>
-            </select>
-        </div>
-      </div>
+      <AppSearch @search="searchType" />
       <div class="row background-white mt-4">
           <div class="col-12">
             <AppContainCard></AppContainCard>
@@ -53,13 +58,17 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.container-fluid {
-  background-color: #d48f38;
+@use '../styles/partials/variables' as *;
 
-  .margin-auto,
+.container-fluid {
+  background-color: $color_orange;
+  padding-bottom: 30px;
+
   .background-white {
     width: 90%;
     margin: 0 auto;
+    background-color: white;
+    margin-top: 30px;
 
 
     select {
@@ -71,10 +80,7 @@ export default {
   }
 }
 
-.background-white {
-  background-color: white;
-  margin-top: 30px;
-}
+
 
 /* ANIMATION*/
 .animation {

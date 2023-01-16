@@ -22,9 +22,10 @@ export default {
     getUrlCards() {
       axios.get(store.url).then((response) => {
         store.arraycards = response.data.data
+        store.arraylenght = store.arraycards.length
         setTimeout(() => {
           store.loading_page = false
-        }, 5000)
+        }, 2000)
 
       })
     }
@@ -39,5 +40,5 @@ export default {
 </template>
 
 <style lang="scss">
-@use './styles/generals.scss';
+@use './styles/generals.scss' as *;
 </style>

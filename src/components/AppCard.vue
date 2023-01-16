@@ -18,9 +18,11 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+@use '../styles/partials/variables' as *;
+
 .card {
     width: calc(100% / 5 - 20px);
-    background-color: #d48f38;
+    background-color: $color_orange;
 
 }
 
